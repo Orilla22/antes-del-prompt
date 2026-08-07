@@ -1,0 +1,701 @@
+<!DOCTYPE html><html class="dark" lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Antes del Prompt — La Dirección &amp; Ori</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-background": "#e5e2e0",
+                "inverse-primary": "#2143f9",
+                "on-secondary": "#001e92",
+                "inverse-surface": "#e5e2e0",
+                "on-primary-container": "#dee0ff",
+                "on-surface-variant": "#c4c5d9",
+                "on-secondary-container": "#a8b4ff",
+                "on-tertiary": "#32302a",
+                "tertiary-fixed": "#e7e2d8",
+                "surface-container": "#20201e",
+                "on-tertiary-fixed-variant": "#49473f",
+                "tertiary-fixed-dim": "#cbc6bc",
+                "tertiary": "#cbc6bc",
+                "surface": "#131312",
+                "surface-container-low": "#1c1c1a",
+                "secondary": "#bbc3ff",
+                "on-secondary-fixed-variant": "#1132c1",
+                "on-primary-fixed": "#000e5f",
+                "surface-container-high": "#2a2a29",
+                "secondary-container": "#1635c3",
+                "primary-container": "#2b4bff",
+                "on-tertiary-fixed": "#1d1c16",
+                "tertiary-container": "#67645c",
+                "inverse-on-surface": "#31302f",
+                "surface-tint": "#bbc3ff",
+                "on-tertiary-container": "#e6e1d7",
+                "on-primary-fixed-variant": "#002ad0",
+                "surface-container-highest": "#353533",
+                "error-container": "#93000a",
+                "primary-fixed": "#dfe0ff",
+                "on-surface": "#e5e2e0",
+                "outline": "#8e8fa2",
+                "surface-bright": "#3a3938",
+                "background": "#131312",
+                "on-primary": "#001c95",
+                "surface-variant": "#353533",
+                "error": "#ffb4ab",
+                "secondary-fixed-dim": "#bbc3ff",
+                "on-error": "#690005",
+                "surface-dim": "#131312",
+                "on-error-container": "#ffdad6",
+                "secondary-fixed": "#dee0ff",
+                "surface-container-lowest": "#0e0e0d",
+                "primary-fixed-dim": "#bbc3ff",
+                "outline-variant": "#444656",
+                "on-secondary-fixed": "#000f5c",
+                "primary": "#bbc3ff",
+                "bg": "#0d0d0c",
+                "bg-dim": "#0a0a09",
+                "ink": "#e9e4da",
+                "ink-dim": "#8d877b",
+                "line": "rgba(233,228,218,0.14)",
+                "primary-soft": "#5d75ff",
+                "card": "#141413",
+                "card-hi": "#1b1b19",
+                "wa": "#25d366"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "9999px"
+        },
+        "spacing": {},
+        "fontFamily": {
+                "headline": ["Libre Franklin"],
+                "display": ["Libre Franklin"],
+                "body": ["Libre Franklin"],
+                "label": ["Libre Franklin"],
+                "sans": ["Libre Franklin", "Helvetica", "Arial", "sans-serif"],
+                "serif": ["Georgia", "serif"]
+        },
+        "fontSize": {}
+      },
+    },
+  }
+</script>
+<style>
+  body {
+    background-color: #0d0d0c;
+    color: #e9e4da;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Libre Franklin', sans-serif;
+  }
+  .italic-accent {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: #5d75ff;
+  }
+  .fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .fade.in {
+    opacity: 1;
+    transform: none;
+  }
+  @keyframes pulse-custom {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.3); }
+  }
+  .animate-pulse-custom {
+    animation: pulse-custom 2s ease-in-out infinite;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .gallery-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 16px;
+    padding: 0 4vw 20px 4vw;
+    -webkit-overflow-scrolling: touch;
+  }
+  .gallery-card {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    height: 60vh;
+    min-height: 350px;
+    max-height: 600px;
+    background: #141413;
+    border: 1px solid rgba(233,228,218,0.08);
+    position: relative;
+    overflow: hidden;
+    border-radius: 2rem;
+  }
+  .gallery-card img, .gallery-card video {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    background: #000;
+  }
+  .universe-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #5d75ff;
+    padding-left: 4vw;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="selection:bg-primary selection:text-white overflow-x-hidden">
+<header class="fixed top-0 w-full z-50 bg-bg/85 backdrop-blur-xl border-b border-line">
+<div class="flex justify-between items-center px-[4vw] py-7">
+<div class="flex flex-col gap-1.5">
+<span class="text-sm tracking-wider font-normal"><span class="italic-accent">Antes</span> del prompt</span>
+<span class="text-[9px] tracking-[0.3em] uppercase text-ink-dim">La Dirección · Ori</span>
+</div>
+<nav class="flex items-center md:gap-8 gap-8 gap-4">
+<a class="hidden md:block text-[10px] tracking-[0.22em] uppercase text-ink-dim hover:text-primary-soft transition-colors" href="#programa">Programa</a>
+<a class="hidden md:block text-[10px] tracking-[0.22em] uppercase text-ink-dim hover:text-primary-soft transition-colors" href="#trabajos">Ejemplos</a>
+<a class="hidden md:block text-[10px] tracking-[0.22em] uppercase text-ink-dim hover:text-primary-soft transition-colors" href="#precio">Inversión</a><a class="hidden md:block text-[10px] tracking-[0.22em] uppercase text-ink-dim hover:text-primary-soft transition-colors" href="#precio">Reservar</a>
+<a class="bg-primary text-white text-[10px] tracking-[0.22em] uppercase px-5 py-2.5 transition-all hover:bg-primary-soft hover:-translate-y-px rounded-full" href="https://api.whatsapp.com/send?phone=542213648319&amp;text=Hola!%20Quiero%20reservar%20un%20cupo%20para%20el%20Workshop%20%22Antes%20del%20prompt%22.%20%0A">Reservar mi lugar</a>
+</nav>
+</div>
+</header>
+<main>
+<!-- HERO -->
+<section class="relative pt-[13vh] pb-[11vh] px-[4vw] border-b border-line overflow-hidden text-center fade in pt-20"><div class="absolute inset-0 z-0">
+<video autoplay="" class="absolute inset-0 w-full h-full object-cover" loop="" muted="" playsinline="" preload="auto"><source src="https://8gi8upt0z4aeppcn.public.blob.vercel-storage.com/HERO%20BANNER%20FINAL%20FINAL.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+<div class="absolute inset-0 bg-black/60 z-10"></div>
+</div>
+<div class="relative z-20 max-w-[880px] mx-auto">
+<div class="inline-flex items-center gap-2.5 px-4 py-2 border border-primary-soft text-[10px] tracking-[0.3em] uppercase text-primary-soft mb-8 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-soft animate-pulse-custom"></span>
+    Grupo fundador · 8 lugares
+  </div>
+<h1 class="text-[clamp(40px,6.5vw,86px)] font-light leading-none tracking-tight mb-8">
+    Deja de solo generar y empieza a&nbsp;<span class="italic-accent">dirigir</span>.
+  </h1>
+<p class="text-[clamp(15px,1.2vw,19px)] text-ink-dim leading-relaxed max-w-[54ch] mx-auto font-light">
+    Un workshop en vivo de <b class="text-ink font-normal">6 encuentros</b> para que termines con tu propio <b class="text-ink font-normal">universo visual completo:&nbsp;</b>concepto, imágenes y video; aplicando dirección creativa, no prompts sueltos.
+  </p>
+<div class="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6 px-4">
+<a class="inline-flex items-center justify-center gap-3 px-10 py-4.5 bg-wa text-white text-[11px] tracking-[0.22em] uppercase font-medium transition-all hover:bg-[#1ebe5a] hover:-translate-y-0.5 rounded-full w-full sm:w-auto shadow-lg shadow-wa/10" href="https://api.whatsapp.com/send?phone=542213648319&amp;text=Hola!%20Quiero%20reservar%20un%20cupo%20para%20el%20Workshop%20%22Antes%20del%20prompt%22.%20%0A">
+<span class="material-symbols-outlined text-lg">chat</span>
+    Reservar mi lugar
+  </a>
+<a class="inline-flex items-center justify-center gap-2 text-[10px] tracking-[0.25em] uppercase text-ink-dim hover:text-primary-soft transition-all px-8 py-4.5 border border-line hover:border-primary-soft rounded-full w-full sm:w-auto" href="#programa">
+    Ver el programa
+  </a>
+</div>
+<div class="mt-16 flex flex-wrap justify-center gap-x-12 gap-y-6 text-[10px] tracking-[0.25em] uppercase text-ink-dim/60 max-w-[720px] mx-auto">
+<span class=""><b class="text-primary-soft font-medium">6 encuentros</b> <span class="opacity-30 mx-1">/</span> 2 por semana</span>
+<span class=""><b class="text-primary-soft font-medium">120 min</b> <span class="opacity-30 mx-1">/</span> en vivo</span>
+<span class=""><b class="text-primary-soft font-medium">1:1 inicial</b> <span class="opacity-30 mx-1">/</span> personalizado</span>
+<span class=""><b class="text-primary-soft font-medium">8 personas</b> <span class="opacity-30 mx-1">/</span> cupo máximo</span>
+</div>
+</div></section><section class="bg-bg border-b border-line px-[4vw] py-12 md:py-16"><div class="max-w-[1100px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0">
+<!-- ARRANCAMOS -->
+<div class="flex flex-col items-center md:items-start md:px-8 first:pl-0 last:pr-0 md:border-r border-line last:border-r-0">
+<span class="text-[10px] tracking-[0.3em] uppercase text-ink-dim mb-3">Arrancamos</span>
+<div class="text-xl md:text-2xl font-light text-ink">01 de <font color="#5d75ff" face="Georgia, serif"><i>septiembre</i></font></div>
+</div>
+<!-- FRECUENCIA -->
+<div class="flex flex-col items-center md:items-start md:px-8 first:pl-0 last:pr-0 md:border-r border-line last:border-r-0">
+<span class="text-[10px] tracking-[0.3em] uppercase text-ink-dim mb-3">Frecuencia</span>
+<div class="text-xl md:text-2xl font-light text-ink text-center md:text-left">Martes y Viernes<div class="text-xs tracking-wider text-primary-soft mt-1">17hs ARG / 22hs ESP</div>
+</div>
+</div>
+<!-- TERMINAMOS -->
+<div class="flex flex-col items-center md:items-start md:px-8 first:pl-0 last:pr-0 md:border-r border-line last:border-r-0">
+<span class="text-[10px] tracking-[0.3em] uppercase text-ink-dim mb-3">Terminamos</span>
+<div class="text-xl md:text-2xl font-light text-ink">
+        18 de <span class="italic-accent">septiembre</span>
+</div>
+</div>
+</div>
+</div></section>
+<!-- 3 PILLARS -->
+<section class="bg-bg-dim py-[9vh] px-[4vw] border-b border-line fade in py-12">
+<p class="text-[clamp(22px,2.2vw,30px)] font-light leading-snug tracking-tight text-center max-w-[40ch] mx-auto mb-12 text-ink-dim">
+      Terminas con tu <span class="italic-accent">universo visual completo</span>, un <b class="text-ink font-normal">método real</b> que puedes repetir, y una <b class="text-ink font-normal">comunidad</b>&nbsp;para seguir creando.
+    </p>
+<div class="grid grid-cols-1 md:grid-cols-3 max-w-[1100px] mx-auto md:gap-8 gap-6">
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:-translate-y-1 hover:bg-card-hi rounded-[2.5rem]">
+<div class="italic-accent text-sm mb-6">— 01</div>
+<h3 class="text-lg font-normal mb-3">Tu universo terminado</h3>
+<p class="text-sm leading-relaxed text-ink-dim">Sales del workshop con tu proyecto armado: concepto, imágenes y video. Listo para tu portfolio, tu marca o&nbsp; cliente.</p>
+</div>
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:-translate-y-1 hover:bg-card-hi rounded-[2.5rem]">
+<div class="italic-accent text-sm mb-6">— 02</div>
+<h3 class="text-lg font-normal mb-3">Un método claro</h3>
+<p class="text-sm leading-relaxed text-ink-dim">Sello visual → la inmersión →&nbsp;moodboard → concepto → workflow. El proceso que uso con marcas, paso a paso, para que lo apliques a cada proyecto futuro.</p>
+</div>
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:-translate-y-1 hover:bg-card-hi rounded-[2.5rem]">
+<div class="italic-accent text-sm mb-6">— 03</div>
+<h3 class="text-lg font-normal mb-3">Grupo reducido</h3>
+<p class="text-sm leading-relaxed text-ink-dim">Grupo pequeño con feedback directo en cada clase. Nos juntamos 1:1 antes de empezar para conocernos y entender hacia dónde quieres ir.</p>
+</div>
+</div>
+</section>
+<!-- SITUACIONES -->
+<section class="py-[11vh] px-[4vw] fade in py-16" id="situaciones">
+<div class="text-center mb-12">
+<div class="text-[10px] tracking-[0.3em] uppercase text-ink-dim mb-6"><b class="text-primary-soft font-normal">01</b> / Antes de empezar</div>
+<h2 class="text-[clamp(34px,5vw,64px)] font-light leading-[1.05] tracking-tight max-w-[20ch] mx-auto">El workshop es para ti si:</h2>
+</div>
+<div class="max-w-[880px] mx-auto">
+<ul class="space-y-0">
+<li class="border-b border-line flex items-start text-[clamp(15px,1.1vw,18px)] leading-relaxed gap-7 py-7">
+<span class="text-lg flex-shrink-0 leading-none">🍅</span>
+          Generas imágenes con AI pero salen genéricas, parecen hechas por todos.
+        </li>
+<li class="border-b border-line flex items-start text-[clamp(15px,1.1vw,18px)] leading-relaxed gap-7 py-7">
+<span class="text-lg flex-shrink-0 leading-none">🍅</span>
+          Cada pieza se ve distinta: los personajes cambian, los mundos no conectan, no hay un universo.
+        </li>
+<li class="border-b border-line flex items-start text-[clamp(15px,1.1vw,18px)] leading-relaxed gap-7 py-7">
+<span class="text-lg flex-shrink-0 leading-none">🍅</span>
+          Sabes algo de prompts pero sientes que falta criterio, dirección, intención.
+        </li>
+<li class="border-b border-line flex items-start text-[clamp(15px,1.1vw,18px)] leading-relaxed gap-7 py-7">
+<span class="text-lg flex-shrink-0 leading-none">🍅</span>
+          Quieres posicionar tu marca o tu trabajo creativo pero no sabes cómo diferenciarte del ruido.
+        </li>
+<li class="flex items-start text-[clamp(15px,1.1vw,18px)] leading-relaxed gap-7 py-7">
+<span class="text-lg flex-shrink-0 leading-none">🍅</span>
+          Estás generando y descartando sin un proceso claro que te lleve a un resultado coherente.
+        </li>
+</ul>
+<div class="mt-12 p-9 bg-card border-l-[3px] border-primary font-light text-[clamp(20px,2.2vw,30px)] leading-tight tracking-tight rounded-r-[2.5rem]">
+        No es la herramienta. Es que nadie te enseñó lo que viene&nbsp;<div class=""><span class="italic-accent">antes del prompt</span>.
+      </div></div>
+</div>
+</section>
+<!-- 4 STEPS -->
+<section class="py-[11vh] px-[4vw] fade in">
+<div class="text-center mb-12">
+<div class="text-[10px] tracking-[0.3em] uppercase text-ink-dim mb-6"><b class="text-primary-soft font-normal">02</b> / El método</div>
+<h2 class="text-[clamp(34px,5vw,64px)] font-light leading-[1.05] tracking-tight max-w-[20ch] mx-auto">Antes del prompt,&nbsp;<div class=""><span class="italic-accent">cinco pasos</span>.</div></h2>
+<p class="mt-5 text-[clamp(14px,1vw,16px)] text-ink-dim leading-relaxed max-w-[58ch] mx-auto">Lo que separa una pieza con dirección de una imagen genérica con AI. El método que enseño en cada encuentro.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 max-w-[1200px] mx-auto gap-6">
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:-translate-y-1 rounded-[2.5rem]">
+<div class="italic-accent text-[42px] leading-none tracking-tighter opacity-70 mb-7">01</div>
+<h3 class="text-lg font-normal mb-3">Tu sello visual</h3>
+<p class="text-sm leading-relaxed text-ink-dim">Bajamos a tierra tu estilo, tu mirada, tu manera de ver el mundo. Lo que después aplicas a cada proyecto, sea tu marca o para tu portfolio.</p>
+</div><div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:-translate-y-1 rounded-[2.5rem]"><div class="italic-accent text-[42px] leading-none tracking-tighter opacity-70 mb-7">02</div><h3 class="text-lg font-normal mb-3">La Inmersión</h3><p class="text-sm leading-relaxed text-ink-dim">Conocer la marca a profundidad: qué es, qué no es, a quién le habla, para poder construir un brief que&nbsp; sea la guía para crear desde la esencia de la misma. Si es un proyecto ficticio para portfolio, el proceso es el mismo.</p></div>
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:-translate-y-1 rounded-[2.5rem]"><div class="italic-accent text-[42px] leading-none tracking-tighter opacity-70 mb-7">03</div><h3 class="text-lg font-normal mb-3">El concepto</h3><p class="text-sm leading-relaxed text-ink-dim">De tu mirada y la inmersión nace una idea con intención. Apalancado a un momento fuerte, simple, con tensión. World-building real.</p></div>
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:-translate-y-1 rounded-[2.5rem]"><div class="italic-accent text-[42px] leading-none tracking-tighter opacity-70 mb-7">04</div><h3 class="text-lg font-normal mb-3">El moodboard</h3><p class="text-sm leading-relaxed text-ink-dim">&nbsp;No es solo juntar fotos lindas, es definir la atmósfera, el color, la composición, los planos y la textura que darán vida a tu concepto visual. Tu argumento creativo</p></div>
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:-translate-y-1 rounded-[2.5rem]"><div class="italic-accent text-[42px] leading-none tracking-tighter opacity-70 mb-7">05</div><h3 class="text-lg font-normal mb-3">La producción</h3><p class="text-sm leading-relaxed text-ink-dim">Aprendemos a usar las herramientas de AI con criterio. Storyboard, multishoot, frame 1 + frame 2 = acción. La herramienta ejecuta lo que tú diriges.</p></div>
+</div>
+</section>
+<!-- GALLERY -->
+<section class="py-[11vh] border-b border-line fade in" id="trabajos"><div class="text-center mb-16 px-[4vw]"><div class="text-[10px] tracking-[0.3em] uppercase text-ink-dim mb-6"><b class="text-primary-soft font-normal">03</b> / Referencia</div><h2 class="text-[clamp(34px,5vw,64px)] font-light leading-[1.05] tracking-tight max-w-[20ch] mx-auto">Esto es lo que <span class="italic-accent">puedes crear</span>.</h2><p class="mt-5 text-[clamp(14px,1vw,16px)] text-ink-dim leading-relaxed max-w-[58ch] mx-auto">Universos visuales creados con dirección creativa y AI,&nbsp;</p></div><div class="relative group/gallery"><div class="gallery-scroll-container no-scrollbar gap-6" style="padding-left: 4vw; padding-right: 4vw;"><div class="gallery-card"><video autoplay="" loop="" muted="" playsinline="" style="height: 100%; width: auto; object-fit: cover; background: transparent;"><source src="https://8gi8upt0z4aeppcn.public.blob.vercel-storage.com/tomatecompress.mp4" type="video/mp4"></video></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcI1b3YucjazElpb78LBxYFpTshX_RF15d03pdvKE8jl2lKlmKrfaCk9tbtZrUjTQqfeVYgQ1KVjFBNEujjQ6ch8YDS0AGbsVNv2RK7REwYZb3eqXWoREUQOGh7TvyEvdv4hItP6qlvaV6cQmKsPlDNDqQ_8qOCNmsBUOQr_QV9_n1ubCA8rie1VjSaeAqaAzB8B47ACq-syMi7idN4GHnL7tmTGubwHhi8ix7-Peb_CF67G8pA4_uYEuQNG2dPKrp9pw" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7dG6hVqMN7RTaVZMWB-ue0e3oA-9ZF33RvklLgfXdbFU-8UqqUH2ovlx0r9LFYFPxxtC6D3yf1_ZQTl3620saqxFUVlSW7JMuPe_tYzVbtvzaW_Jn5hunSAsz4pEGfgctKmTd_p9k-qrJutm9miecYoVj0_hbH6dRY5jy7T1OdYHK7QwqFutP42UdlfQdRPX-kFxzHNiIQ6pc27zeek8nYLfnPe--y0QxkVC7bq73E1bPIs6KpPUsP1mp2MVANHb4SzI" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><video autoplay="" loop="" muted="" playsinline="" style="height: 100%; width: auto; object-fit: cover; background: transparent;"><source src="https://8gi8upt0z4aeppcn.public.blob.vercel-storage.com/video%20final%20flores.mp4" type="video/mp4"></video></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWXWo6H_Ed9ECyFH0XMGsSlphoow7EtLP4y0D6vNxawPqc8kUZPxyTMMA3dpr1qvEFTjuqUzgYF0nUITxnVJSaFSdIYEUuVeL2z8pDBUldmQMByr0cqXPXnWse1jtjUAbL8UoVM-2wC32F3fo6PwJZolO1DAvEDkliA4_lXxXW5wWqRGrLqWSg1c64uoOLPKT1-hqXCJxNAdvsRKPJiP9-K_vkGsIR6uUGN6XIUZvGFvg-WMIAuZ2_QkwUoKKYAdPfSW0" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTtUazKYaOv5_SxoO7xfbCLBydwezTwoPD6yX5rO9ck1ZrCSoyeVgtQw3ckuvFIC-OIq6T_GnwmeGf8KA-3iVVC8L-y-cw_g1CsUaNgcrsBytLGnnOzd8f9vGr967vtdN9RaFoIRuxtZQXmItRe_5X1QhnzRahO6vRDdpf1IrGPsy_ZtEkfplKE8c4lpjzr5toDDDg89koVOSEnZF5l1SNaYsmB5qc9K7bsZlC-WR4T6aX3Mwue98I7LbTrvthfyks-f0" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm9pCaaP3EhBRmnfYmMvtkS8yOUqi_ryIPg5OtOCVtICpZZjDvcQREJc6dt0hRpIO4B-Oh88VzbmsqSgSDA9Wi0eENi2f8Of9EVBsOc0tp0dh_AotBuQgpsSMVGhEeBFwN6OvTI6W-qNWYcc_0LURt6TG-3Jv4bQ_2K0uIKSDJWkM6k1pVhazwYcJ3u7a6_Q1X-RnxKiQc81Yup84la1KMhRtMnu0YzdN7HoxlK03EKfu6pHwzZUnRZaA4aYn-ysRXeEo" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqLLL6ehf_hL2J7GcHFCPGKHkrBIhOKJF_hWh9LsFTYUeUH0xdzZPS9OvJz8IsUvD4kShZSE1VRfAjKoJLLuSRa3JkCcT5-P-_jChJP7ajpbm-aScnPFkDEa0WLFeotK9AQvOOMhHJx-YHVCv-cLypgRpLtu0UdWCiXKd5mKY3gdFqZtZeZKD6CD9taiu0JPb6OXiUunx-vCeaVDZVcHTdHaqiSrae80_FTyLvocYAKEgNSCS4Ir9dwMecjCn3K3mks8c" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4PjkwkxTxl0miiNQtwl8wcmdde9IQe6ir_XydHqJ73UP-Hi7tVeC_7_tHB6yn1Kk6nmOX8WvZdMr8PfggnCBTuagPWaeKJMiz00qOZ3gADugXW9TEaVIoEN2OFeNAriOBJ5GgevMD3Ofjb_g133wx7NShyFdVOwVXfi-yss8OXOaU-mYQBajtIFqkG5eYHIZ7bV1EG9TDrOVU74Te55GxsVTG_xShfmLXcoQwJAaoOSGdsmYCXqWLGUekGCKoL61Dl68" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><video autoplay="" loop="" muted="" playsinline="" style="height: 100%; width: auto; object-fit: cover; background: transparent;"><source src="https://8gi8upt0z4aeppcn.public.blob.vercel-storage.com/hf_20260324_144406_2195eca4-06fa-4d86-8496-b0022ebc3dfd%20%283%29.mp4" type="video/mp4"></video></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvZGstbfsCD8C7Wa6yXtKHnPgh-NJ2L5Yo38YJMYS7_m1jeTaaWgRdB2WGw58QskQq2p1mR7ntPtRCR2I5c46FhM9vt4c02-gjAQLgdqinu0hixKSqKoJyv3Oh7SvlEWZKyzsov_FHTD4P5e0afeZyeUn5Bsl-WA1wbkXQfsvPoe8RD5gG5rwKVIQ7EQgMa6gaqvMmp1Rw9kZoIhZWfshe2oCK_kjAN_yExcq2ageZWwh-HrFv-v-su00mtIvkg9uttM9oADZPlJavY74" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq2TDA-bZprLENauYY_cz7XyXv-yQQFdmB-yfAi8zGryyJYUlyUQPgPkEylW_q6teRMjL8VJp2c2k6H3CTMTIROqRbTCVFRBksK7Naqa8CnZ8f8MKQnaeep-s3VNZGzi1mxPQixgB39gZWfcg4Qq4zo12TN-Rjp_G-qACn5k_Waju3sqLdvKGN6p2ZIBWhyB1GzUiB19rzNsIB1vJem3ICcnbNBL38YP9gqPcz_d20nbBOf5Cf-FVb4h6tnqvFIoLEumI" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqFFkWlHYnnDjvfDrCb8iwdOgFxmGoOOY8KCcLcxN3_EHDiZriz9jtN74HLRM6J_5qps58OKehEy_k-isXZwvFrt6-Ek2QRi9KVBzrGaAtekAYboIVwacgYSBNkJ1bnbeZ8u5R_cvpEhk8hJew1IQk9_WV09y0ogp1FMz2zUhdzsed5scI1tUVDIlMsQE1VQpO5sqpKkQQOCGJKQGhN54IwYV4X7KPo524KL9pQT2PvGafCLUZ2i1l5cgj3o2bczIUC3Q" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><video autoplay="" loop="" muted="" playsinline="" style="height: 100%; width: auto; object-fit: cover; background: transparent;"><source src="https://8gi8upt0z4aeppcn.public.blob.vercel-storage.com/SnapInsta.to_AQOS2b9Xhm4bVfqjtF7jiLkJ-T-fJn8UHeJggdVyJgXKq1isrnd3qikgNQs_Q8UIWI1crZtDsbQGcHcskdSObSpn82BcIzJO4l8gF9A%20(1).mp4" type="video/mp4"></video></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9Q6eCPbNzy2CUpVqN-LICyktroqzgTpXxnivCxkf8RAgCEYJ9zYwQupB7QvGbZ1ese09-G0axJtEVdrlKzwIUvfx7pT8Lua8ssemTbv2FVjn3-8EAqdEqhhthMlBmqSXT41QuT81wN7yYzETzwGXuzUOSpQECYcpP-DinSax1xWPuFk6L9-MkoTAsKoArDRFu9S1OHT6YBqiYau7ZOSFsXjEblVb3SMj5hZ7bU53ex6Q6XeBar_MQb2gk3VEM7afIDJtoYVWr1JkWRw" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-zY-QfzSBEz66x6XPX15zv7cyM_nPUZhrmDYJFICwUOe6iXtknbHZJCwyQ-xJ-WTKI1aymsk1aOpXp_f1PjBpAhj81kH0B3OzCZ_N5_rMGlRoxUfrR4_iSWVNM4Pb56m8i1ojk6g2Nx5rMKipyZOI0OMbUUYL7kw_9O7hidoK3r5g-GxBLRxZbbQTXLX5LrM_YBBanqeQmBE_G8ntiJZnxuSjpN_S2n1bLOUP0a3ffR5VfCYBxjK1uh5JoGVDoVzc_l13sUhZuPPm0A" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr7FcVxmLncBQYzdyNpa-kAqteHcYfLypryKPuDeYS7opfTmYKaHBka3Reuzx9Hgfns-MrJxTKgh8rVzgP5z5zT-YhinWVaeYjzuYO4t2EIeCM_1jHkygJTkeq38_qyIOLdIHiiOT2cwz4kPjNv1N1ibjRUXB1SpiQsqyG2FiG8HlQtdKvLG0pXSawPH_CPANkITnKC2sP1Dro8NE5244yL9KUUbnei2dJq1ia9TLZzSUuz12QuNvy5qX_A1-cetNfqxFrL5-gDab7wg" style="height: 100%; width: auto; object-fit: cover; background: transparent;"></div><div class="gallery-card"><video autoplay="" loop="" muted="" playsinline="" style="height: 100%; width: auto; object-fit: cover; background: transparent;"><source src="https://8gi8upt0z4aeppcn.public.blob.vercel-storage.com/SnapInsta.to_AQMTY4qm1-VWUGUGIOWku9vSjoAQbl0y2Ej41cxwyFrV7kVCaJcC_MIN1TB_HSE4SiSvvzwENJPDlSCwpdM4dSFeMqZQFR8aIRhEc0k.mp4" type="video/mp4"></video></div><div class="gallery-card"><video autoplay="" loop="" muted="" playsinline="" style="height: 100%; width: auto; object-fit: cover; background: transparent;"><source src="https://8gi8upt0z4aeppcn.public.blob.vercel-storage.com/SnapInsta.to_AQMGusCbBGEOUAWUBItYCaDgPa1ZFTiMU2JtmUaYavkS5YidGFFmilkZ678GGhn5xxpw87Ul9pVnRJY9yvTchwzCadGIFhMP9ZKXWyk.mp4" type="video/mp4"></video></div><div class="gallery-card"><video autoplay="" class="" loop="" muted="" playsinline="" style="height: 100%; width: auto; object-fit: cover; background: transparent;"><source src="https://8gi8upt0z4aeppcn.public.blob.vercel-storage.com/41D461C1-44F7-4B3F-ADC1-84FCA33A1006.mov" type="video/mp4"></video>"</div><div class="gallery-card"><video autoplay="" loop="" muted="" playsinline="" style="height: 100%; width: auto; object-fit: cover; background: transparent;"><source src="https://8gi8upt0z4aeppcn.public.blob.vercel-storage.com/SnapInsta.to_AQNLFgoWjde9HjQe2mK9Sf2VTyikhy532-8gWf5fJukvNXEYlrT2lLSrZ3XqZnuay5a05w8xiY6UlBktNXnogDacXcfCdq9Fqj4vgWw.mp4" type="video/mp4"></video></div><div class="gallery-card"><video autoplay="" loop="" muted="" playsinline="" style="height: 100%; width: auto; object-fit: cover; background: transparent;"><source src="https://8gi8upt0z4aeppcn.public.blob.vercel-storage.com/SnapInsta.to_AQMe0kmuS3feoGlLtZ7odBOSK0IJSZFP9RBEDCr8srHgCjA7Ctz_j3egh529Gr5kAdqlk-DYOhIkP5uNr12gclSU.mp4" type="video/mp4"></video></div></div><button class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm border border-white/10 hover:bg-black/60 transition-all opacity-0 group-hover/gallery:opacity-100" onclick="this.nextElementSibling.scrollBy({left: -400, behavior: 'smooth'})"><span class="material-symbols-outlined">chevron_left</span></button><button class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm border border-white/10 hover:bg-black/60 transition-all opacity-0 group-hover/gallery:opacity-100" onclick="this.previousElementSibling.previousElementSibling.scrollBy({left: 400, behavior: 'smooth'})"><span class="material-symbols-outlined">chevron_right</span></button></div></section>
+<!-- LO QUE TE LLEVAS -->
+<section class="py-[11vh] px-[4vw] fade in py-16">
+<div class="text-center mb-12">
+<div class="text-[10px] tracking-[0.3em] uppercase text-ink-dim mb-6"><b class="text-primary-soft font-normal">04</b> / El valor</div>
+<h2 class="text-[clamp(34px,5vw,64px)] font-light leading-[1.05] tracking-tight max-w-[20ch] mx-auto">Lo que <span class="italic-accent">te llevas</span>.</h2>
+<p class="mt-5 text-[clamp(14px,1vw,16px)] text-ink-dim leading-relaxed max-w-[58ch] mx-auto">Resultados concretos, no solo teoría:&nbsp; un proyecto armado</p><div class="">&nbsp;plantillas, comunidad y un método que puedes seguir usando.</div><p></p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 max-w-[1100px] mx-auto gap-5">
+<div class="bg-card p-7 border-line border flex gap-5 items-start transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-0.5 border-primary-soft bg-gradient-to-br from-[#141420] to-[#1a1a28] rounded-[2rem]">
+<div class="w-3.5 h-3.5 rounded-full border-2 border-primary-soft flex-shrink-0 mt-1.5"></div>
+<div>
+<h4 class="text-[15px] font-normal mb-1.5">Un <span class="italic-accent">1:1 inicial</span> conmigo</h4>
+<p class="text-sm leading-relaxed text-ink-dim">Antes de empezar nos juntamos para conocernos: tu historia, tus intereses, qué proyecto quieres trabajar y a dónde quieres llegar.</p>
+</div>
+</div>
+<div class="bg-card p-7 border-line border flex gap-5 items-start transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-0.5 rounded-[2rem]">
+<div class="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></div>
+<div>
+<h4 class="text-[15px] font-normal mb-1.5">Tu universo visual completo</h4>
+<p class="text-sm leading-relaxed text-ink-dim">Concepto, imágenes y video, un proyecto real para tu portfolio, tu marca o cliente.</p>
+</div>
+</div>
+<div class="bg-card p-7 border-line border flex gap-5 items-start transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-0.5 rounded-[2rem]">
+<div class="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></div>
+<div>
+<h4 class="text-[15px] font-normal mb-1.5">Tu sello visual definido</h4>
+<p class="text-sm leading-relaxed text-ink-dim">Tu mirada, tu estilo, tu argumento creativo. El punto de partida que vas a aplicar a cada proyecto que hagas desde ahora.</p>
+</div>
+</div>
+<div class="bg-card p-7 border-line border flex gap-5 items-start transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-0.5 rounded-[2rem]">
+<div class="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></div>
+<div>
+<h4 class="text-[15px] font-normal mb-1.5">La guía paso a paso para crear con AI</h4>
+<p class="text-sm leading-relaxed text-ink-dim">El workflow completo que uso, documentado. Te queda como manual para repetirlo en cada proyecto, básicamente es el recorrido de nuestros encuentros.</p>
+</div>
+</div>
+<div class="bg-card p-7 border-line border flex gap-5 items-start transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-0.5 rounded-[2rem]">
+<div class="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></div>
+<div>
+<h4 class="text-[15px] font-normal mb-1.5">La plantilla que uso para presentar conceptos</h4>
+<p class="text-sm leading-relaxed text-ink-dim">La misma con la que presento mis proyectos a clientes. Para que vendas como directora, no como prompter.</p>
+</div>
+</div>
+<div class="bg-card p-7 border-line border flex gap-5 items-start transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-0.5 rounded-[2rem]">
+<div class="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></div>
+<div>
+<h4 class="text-[15px] font-normal mb-1.5">Material para tu proyecto en Claude o Gemini</h4>
+<p class="text-sm leading-relaxed text-ink-dim">Recursos para armar tu proyecto en Claude o nutrir tu chat de Gemini con el contexto correcto.</p>
+</div>
+</div>
+<div class="bg-card p-7 border-line border flex gap-5 items-start transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-0.5 rounded-[2rem]">
+<div class="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></div>
+<div>
+<h4 class="text-[15px] font-normal mb-1.5">15 ideas para publicar tu proceso</h4>
+<p class="text-sm leading-relaxed text-ink-dim">Tu proceso creativo también es contenido. Ideas listas basadas en lo que creaste durante el workshop.</p>
+</div>
+</div>
+<div class="bg-card p-7 border-line border flex gap-5 items-start transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-0.5 rounded-[2rem]">
+<div class="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></div>
+<div>
+<h4 class="text-[15px] font-normal mb-1.5">Sugerencia de como armar tu portfolio&nbsp;</h4>
+<p class="text-sm leading-relaxed text-ink-dim">Te muestro cómo armarlo con Claude + HTML y subirlo a la web. El mismo método que usé para el mío.</p>
+</div>
+</div>
+<div class="bg-card p-7 border-line border flex gap-5 items-start transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-0.5 rounded-[2rem]">
+<div class="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></div>
+<div>
+<h4 class="text-[15px] font-normal mb-1.5">Grupo de WhatsApp con las 8 participantes</h4>
+<p class="text-sm leading-relaxed text-ink-dim">Comunidad activa para seguir en contacto, compartir referencias y soporte directo durante el workshop.</p>
+</div>
+</div>
+<div class="bg-card p-7 border-line border flex gap-5 items-start transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-0.5 rounded-[2rem]">
+<div class="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></div>
+<div>
+<h4 class="text-[15px] font-normal mb-1.5">Acceso a las grabaciones</h4>
+<p class="text-sm leading-relaxed text-ink-dim">Cada encuentro queda grabado y disponible para que lo revises cuando quieras.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- PROGRAMA -->
+<section class="py-[11vh] px-[4vw] fade in py-16" id="programa">
+<div class="text-center mb-12">
+<div class="text-[10px] tracking-[0.3em] uppercase text-ink-dim mb-6"><b class="text-primary-soft font-normal">05</b> / El programa</div>
+<h2 class="text-[clamp(34px,5vw,64px)] font-light leading-[1.05] tracking-tight max-w-[20ch] mx-auto">Seis encuentros, <span class="italic-accent">un universo</span>.</h2>
+<p class="mt-5 text-[clamp(14px,1vw,16px)] text-ink-dim leading-relaxed max-w-[58ch] mx-auto">2 encuentros por semana durante 3 semanas. Cada uno de 120 minutos en vivo. Feedback directo sobre tu proyecto en cada clase.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[1100px] mx-auto gap-6">
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-1 flex flex-col min-h-[200px] rounded-[2.5rem]">
+<div class="text-primary-soft text-[10px] tracking-[0.3em] uppercase mb-4.5 font-mono">ENCUENTRO 01</div>
+<h4 class="text-lg font-normal mb-4">La mirada <span class="italic-accent">(tu sello visual)</span></h4>
+<p class="text-sm leading-relaxed text-ink-dim">Bajamos a tierra tu estilo: tu mirada del mundo, lo que te emociona, lo que quieres decir. Salimos con tu primer moodboard personal para que tengas tu sello visual.</p>
+</div>
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-1 flex flex-col min-h-[200px] rounded-[2.5rem]">
+<div class="text-primary-soft text-[10px] tracking-[0.3em] uppercase mb-4.5 font-mono">ENCUENTRO 02</div>
+<h4 class="text-lg font-normal mb-4">El concepto <span class="italic-accent">(qué quieres decir)</span></h4>
+<p class="text-sm leading-relaxed text-ink-dim">Aprendes&nbsp; dirección creativa aplicada en AI. Eliges tu proyecto y arrancamos su concepto: una idea con intención, no solo una imagen linda.</p>
+</div>
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-1 flex flex-col min-h-[200px] rounded-[2.5rem]">
+<div class="text-primary-soft text-[10px] tracking-[0.3em] uppercase mb-4.5 font-mono">ENCUENTRO 03</div>
+<h4 class="text-lg font-normal mb-4">Del concepto al <span class="italic-accent">workflow</span></h4>
+<p class="text-sm leading-relaxed text-ink-dim">Aquí aprendes a usar las herramientas de AI. Armamos tu storyboard y moodboard de concepto, dejamos el workflow listo para ejecutar.</p>
+</div>
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-1 flex flex-col min-h-[200px] rounded-[2.5rem]">
+<div class="text-primary-soft text-[10px] tracking-[0.3em] uppercase mb-4.5 font-mono">ENCUENTRO 04</div>
+<h4 class="text-lg font-normal mb-4">Creación de <span class="italic-accent">imágenes</span></h4>
+<p class="text-sm leading-relaxed text-ink-dim">Vemos y creamos&nbsp; imágenes con sello propio.aprenderás sobre la importancia de la iteración. La imagen es la base del video, una sola buena imagen es suficiente para crear el universo.</p>
+</div>
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-1 flex flex-col min-h-[200px] rounded-[2.5rem]">
+<div class="text-primary-soft text-[10px] tracking-[0.3em] uppercase mb-4.5 font-mono">ENCUENTRO 05</div>
+<h4 class="text-lg font-normal mb-4">Creación de <span class="italic-accent">video</span></h4>
+<p class="text-sm leading-relaxed text-ink-dim">De la imagen al video, con criterio. Curamos tus piezas como un universo coherente, animandolas y con tips para la edición y armado del video.</p>
+</div>
+<div class="bg-card p-8 border border-line transition-all duration-500 hover:border-primary-soft hover:bg-card-hi hover:-translate-y-1 flex flex-col min-h-[200px] rounded-[2.5rem]">
+<div class="text-primary-soft text-[10px] tracking-[0.3em] uppercase mb-4.5 font-mono">ENCUENTRO 06</div>
+<h4 class="text-lg font-normal mb-4">Presentación <span class="italic-accent">y al mundo</span></h4>
+<p class="text-sm leading-relaxed text-ink-dim">Presentas tu universo terminado. Te enseño cómo armar tu portfolio (Claude + HTML) y cómo contar el proceso en redes.</p>
+</div>
+</div>
+</section>
+<!-- PROMESA -->
+<section class="mx-[4vw] mb-[11vh] py-15 px-[5vw] bg-gradient-to-br from-[#13131a] to-[#1a1a28] border border-primary-soft relative overflow-hidden max-w-[1100px] md:mx-auto text-center fade in rounded-[3rem]">
+<div class="absolute -top-[50%] -right-[20%] w-[60%] h-[200%] bg-[radial-gradient(ellipse,rgba(43,75,255,0.12)_0%,transparent_70%)] pointer-events-none"></div>
+<div class="relative z-10 max-w-[680px] mx-auto py-12">
+<h3 class="text-[clamp(26px,3.2vw,40px)] font-light leading-snug tracking-tight mb-6">Mi <span class="italic-accent">compromiso</span> contigo.</h3>
+<div class="text-ink text-base leading-relaxed space-y-3.5">
+<p class=""></p><p class="font-claude-response-body break-words whitespace-normal" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 14px 0px 0px; overflow-wrap: break-word; --tw-space-y-reverse: 0;">Acompañarte. Mostrarte el camino real.</p><p class="font-claude-response-body break-words whitespace-normal" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 14px 0px 0px; overflow-wrap: break-word; --tw-space-y-reverse: 0;">Me estresa un poco cuando la comunicación y la intención va por "gana millones con AI, bla bla". Yo siento que se saltea algo importante: el <span class="text-primary" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; --tw-text-opacity: 1; color: rgb(187, 195, 255);">proceso creativo</span>, la <span class="text-primary" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; --tw-text-opacity: 1; color: rgb(187, 195, 255);">iteración</span> (no solo en las imágenes, en TODO lo que haces para mejorar día a día), aprender a construir tu <span class="text-primary" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; --tw-text-opacity: 1; color: rgb(187, 195, 255);">propia perspectiva</span> y <span class="text-primary" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; --tw-text-opacity: 1; color: rgb(187, 195, 255);">mirada</span>.</p><p class="font-claude-response-body break-words whitespace-normal" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 14px 0px 0px; overflow-wrap: break-word; --tw-space-y-reverse: 0;">El dinero viene si eres buena en lo que haces. Y esto es una habilidad, un oficio, hay que practicar, iterar, equivocarse, volver a probar. Ese camino lo hacemos juntas.</p><p style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 14px 0px 0px; --tw-space-y-reverse: 0;"></p><p class="" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; margin: 14px 0px 0px; --tw-space-y-reverse: 0;"><span class="_animating_6ta1u_10" data-newtext-seq="0" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ;">No vienes a ver solo lo técnico</span><span class="_animating_6ta1u_10" data-newtext-seq="12" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ;">. Vienes a crear </span><span class="_animating_6ta1u_10" data-newtext-seq="43" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ;">con dirección, con </span><span class="_animating_6ta1u_10" data-newtext-seq="62" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ;">acompañamiento&nbsp; sobre lo que </span><span class="_animating_6ta1u_10" data-newtext-seq="95" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ;">haces, y a salir con un </span><span class="_animating_6ta1u_10" data-newtext-seq="119" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ;">proyecto tuyo, con tu mirada.&nbsp;</span></p><p></p>
+<p class=""><br></p>
+</div>
+</div>
+</section>
+<!-- AUTHOR -->
+<section class="py-[11vh] px-[4vw] max-w-[720px] mx-auto text-center fade in pt-[11vh]">
+<div class="w-[min(220px,60%)] aspect-square rounded-full overflow-hidden bg-[#161613] mx-auto mb-8">
+<img alt="Oriana García" class="w-full h-full object-cover bg-[#161613]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCptGoDal0BlqblVfhPRuREVbh3BGgTTK_zWBuYCNTxHg262f_9bmeq5Nz894fXOrcsCnmLH4LsdsQKKWGvDcYXzsd2p7cIxajE0GMmli5J5qV8tuKk0SxP_fIJzAAIqloWFkxAaLQL-0NEFxYcV1aMLSg5CCyDSXvpAmtypA-4RiyXzZA4ThaRQtlX0ec8kFElbbHFBq4K4nnl9SnhlwURS0NrxCPJRUq2-8nOqTatCzPuE4dif25JNDN8wg8rylWabiDDuKVQL9sBSg">
+</div>
+<div class="text-primary-soft text-[10px] tracking-[0.3em] uppercase mb-4.5">&nbsp;Creative Director — La Dirección</div>
+<h2 class="text-[clamp(30px,3.6vw,46px)] font-light leading-tight tracking-tight mb-7">Hola, soy <span class="italic-accent">Oriana</span>,<br>pero me puedes decir <span class="italic-accent">Ori</span>.</h2>
+<div class="text-ink-dim text-base leading-[1.75] space-y-4.5 max-w-[56ch] mx-auto text-center">
+<p class=""></p><p class="">Creo y dirijo con AI para marcas: <span class="text-ink font-normal">fashion films, campañas, branding, music visualizers</span>. Trabajé con marcas de moda, beauty, técnologia, agencias musicales y founders que querían profesionalizar su comunicación visual.&nbsp; También creo sin AI, pero eso te lo cuento cuando nos conozcamos.</p><p class="">Armé este workshop porque creo que <span class="text-ink font-normal">la AI es una herramienta más del stack; </span>como Photoshop, como una cámara, como Premiere. El valor real está en tener una buena visión detrás. Eso es lo que vamos a trabajar juntas.</p><p></p>
+</div>
+<div class="mt-9 pt-9 border-t border-line italic font-serif text-xl leading-relaxed text-ink max-w-[44ch] mx-auto text-center">
+      "La AI es la <span class="text-primary-soft">herramienta</span>. La dirección es <span class="text-primary-soft">el oficio</span>."
+    </div>
+</section><section class="py-[16vh] px-[4vw] text-center fade in py-[8vh]" id="precio"><div class="text-center mb-16"><div class="text-[10px] tracking-[0.3em] uppercase text-ink-dim mb-6"><b class="text-primary-soft font-normal">07</b> / Inversión</div><h2 class="text-[clamp(34px,5vw,64px)] font-light leading-[1.05] tracking-tight max-w-[20ch] mx-auto">Primer grupo, <span class="italic-accent">precio fundador</span>.</h2><p class="mt-5 text-[clamp(14px,1vw,16px)] text-ink-dim leading-relaxed max-w-[58ch] mx-auto">El único grupo a este precio. Cohorte pequeña para que el feedback sea real.</p></div><div class="max-w-[580px] mx-auto bg-card p-14 md:p-20 border border-primary-soft relative pt-20 rounded-[4rem] shadow-2xl px-6"><div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white px-6 py-2 text-[9px] tracking-[0.3em] font-medium whitespace-nowrap rounded-full">GRUPO FUNDADOR · 8 LUGARES</div><div class="text-ink-dim line-through text-lg mb-1.5">USD 450</div><div class="text-[clamp(56px,7vw,90px)] font-light leading-none tracking-tighter mb-4 flex items-center justify-center"><span class="italic-accent text-[0.5em] mr-2">USD</span>300</div><div class="text-ink-dim text-[11px] tracking-[0.22em] uppercase mb-12">Pago único · acceso completo</div><ul class="text-left border-t border-line pt-10 space-y-5 mb-12"><li class="flex gap-4 items-start text-base gap-6"><span class="w-3.5 h-3.5 rounded-full bg-primary flex-shrink-0 mt-1"></span>1:1 inicial conmigo antes de empezar</li><li class="flex gap-4 items-start text-base gap-6"><span class="w-3.5 h-3.5 rounded-full bg-primary flex-shrink-0 mt-1"></span>6 encuentros en vivo (12 hs) · 2 por semana</li><li class="flex gap-4 items-start text-base gap-6"><span class="w-3.5 h-3.5 rounded-full bg-primary flex-shrink-0 mt-1"></span>Grupo de 8 personas — feedback directo en cada clase</li><li class="flex gap-4 items-start text-base gap-6"><span class="w-3.5 h-3.5 rounded-full bg-primary flex-shrink-0 mt-1"></span>Tu universo visual completo al terminar</li><li class="flex gap-4 items-start text-base gap-6"><span class="w-3.5 h-3.5 rounded-full bg-primary flex-shrink-0 mt-1"></span>Método paso a paso, plantillas y material</li></ul><div class="my-8 p-4 bg-white/5 border border-line rounded-xl flex gap-3 items-start text-left"><span class="material-symbols-outlined text-primary-soft text-lg flex-shrink-0">info</span><p class="text-xs leading-relaxed text-ink-dim"><b class="text-ink font-normal">Nota importante:</b> Las herramientas (Higgsfield, Claude) son una inversión personal del alumno y no están incluidas en el precio del workshop.</p></div><a class="inline-flex items-center justify-center gap-2.5 w-full py-5 bg-wa text-white text-xs tracking-[0.22em] uppercase font-medium transition-all hover:bg-[#1ebe5a] hover:-translate-y-0.5 rounded-full" href="https://api.whatsapp.com/send?phone=542213648319&amp;text=Hola!%20Quiero%20reservar%20un%20cupo%20para%20el%20Workshop%20%22Antes%20del%20prompt%22.%20%0A"><span class="material-symbols-outlined text-base">chat</span>Reservar mi lugar por WhatsApp</a><p class="mt-5 text-center italic text-primary-soft text-[13px] font-serif">★ Ven a la primera clase. Si sientes que no es para ti, te devuelvo tu inversión.</p><div class="mt-6 text-ink-dim text-[11px] tracking-[0.16em]"><b class="text-primary-soft font-normal">Solo 8 lugares</b> · escríbeme y reservamos el tuyo, comenzamos el 01 de septiembre.</div></div></section>
+<!-- PRICING -->
+
+<!-- FAQ -->
+<section class="py-[11vh] px-[4vw] max-w-[800px] mx-auto fade in py-16" id="faq">
+<div class="text-center mb-12">
+<div class="text-[10px] tracking-[0.3em] uppercase text-ink-dim mb-6"><b class="text-primary-soft font-normal">08</b> / Preguntas</div>
+<h2 class="text-[clamp(34px,5vw,64px)] font-light leading-[1.05] tracking-tight max-w-[20ch] mx-auto">Lo que más <span class="italic-accent">me preguntan</span>.</h2>
+</div>
+<div class="space-y-0">
+<details class="group border-b border-line" open="">
+<summary class="flex justify-between items-center py-6 cursor-pointer list-none text-ink text-base leading-snug">
+          ¿Las herramientas están incluidas en el precio?
+          <span class="text-primary-soft text-2xl group-open:rotate-45 transition-transform">+</span>
+</summary>
+<div class="pb-6 text-ink-dim text-sm leading-relaxed max-w-[62ch]">
+          No. Las herramientas son tu inversión personal, igual que un fotógrafo invierte en su cámara o un diseñador en su licencia de Adobe. Son herramientas de trabajo.
+        </div>
+</details>
+<details class="group border-b border-line" open="">
+<summary class="flex justify-between items-center py-6 cursor-pointer list-none text-ink text-base leading-snug">
+          ¿Necesito saber de AI antes?
+          <span class="text-primary-soft text-2xl group-open:rotate-45 transition-transform">+</span>
+</summary>
+<div class="pb-6 text-ink-dim text-sm leading-relaxed max-w-[62ch]">
+          No. Este workshop es de <b class="text-ink font-normal">dirección creativa con AI</b> — el pilar 1 es la dirección creativa, no la herramienta. Si nunca abriste una AI antes, mejor: no traes vicios.
+        </div>
+</details>
+<details class="group border-b border-line" open="">
+<summary class="flex justify-between items-center py-6 cursor-pointer list-none text-ink text-base leading-snug">
+          ¿Y si no tengo marca propia?
+          <span class="text-primary-soft text-2xl group-open:rotate-45 transition-transform">+</span>
+</summary>
+<div class="pb-6 text-ink-dim text-sm leading-relaxed max-w-[62ch]">
+          Perfecto también. Trabajas un proyecto para tu portfolio. El método es exactamente el mismo. Muchos creativos llegan así: con ganas de tener piezas propias que mostrar.
+        </div>
+</details>
+<details class="group border-b border-line" open="">
+<summary class="flex justify-between items-center py-6 cursor-pointer list-none text-ink text-base leading-snug">
+          ¿Cómo reservo mi lugar?
+          <span class="text-primary-soft text-2xl group-open:rotate-45 transition-transform">+</span>
+</summary>
+<div class="pb-6 text-ink-dim text-sm leading-relaxed max-w-[62ch]">
+          Escríbeme por WhatsApp tocando el botón de "Reservar mi lugar". Conversamos, te paso los datos de pago y confirmamos. Una vez confirmado, agendamos el 1:1 inicial.
+        </div>
+</details>
+</div>
+</section><div class="relative w-full cursor-grab active:cursor-grabbing py-4 h-6" id="canvas-container"><canvas width="1236" height="1200" style="display: block; width: 618px; height: 600px;"></canvas><canvas width="2560" height="1392" style="display: block; width: 1280px; height: 696px;"></canvas><canvas width="2560" height="2656" style="display: block; width: 1280px; height: 1328px;"></canvas><canvas width="2560" height="64" style="display: block; width: 1280px; height: 32px;"></canvas><canvas width="2560" height="64" style="display: block; width: 1280px; height: 32px;"></canvas></div>
+</main>
+<footer class="py-[14vh] px-[4vw] text-center border-t border-line bg-bg">
+<h2 class="text-[clamp(32px,5vw,68px)] font-light leading-[1.05] tracking-tight max-w-[22ch] mx-auto mb-6">
+    El oficio antes de la <span class="italic-accent">herramienta</span>.
+  </h2>
+<p class="text-ink-dim text-[15px] leading-relaxed max-w-[46ch] mx-auto mb-9">Si llegaste hasta aquí ya sabes que esto no es un workshop más. Reserva tu lugar en el primer grupo y aprende a dirigir lo que generas.</p>
+<div class="flex justify-center flex-wrap gap-3.5 mb-16">
+<a class="inline-flex items-center gap-2.5 px-10 py-4 bg-wa text-white text-xs tracking-[0.22em] uppercase font-medium transition-all hover:bg-[#1ebe5a] rounded-full" href="https://api.whatsapp.com/send?phone=542213648319&amp;text=Hola!%20Quiero%20reservar%20un%20cupo%20para%20el%20Workshop%20%22Antes%20del%20prompt%22.%20%0A">
+<span class="material-symbols-outlined text-base">chat</span>
+      Reservar mi lugar por WhatsApp
+    </a>
+</div>
+<div class="flex justify-center flex-wrap gap-12 md:gap-20 border-t border-line pt-12.5 mb-12 mt-16 gap-8"><a aria-label="Instagram" class="text-ink hover:text-primary-soft transition-colors" href="https://www.instagram.com/orianaismoreno/?hl=en" target="_blank"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a><a aria-label="Email" class="text-ink hover:text-primary-soft transition-colors" href="mailto:ladireccion.studio@gmail.com"><span class="material-symbols-outlined text-2xl">mail</span></a><a aria-label="LinkedIn" class="text-ink hover:text-primary-soft transition-colors" href="https://www.linkedin.com/in/oriana-garc%C3%ADa-6ba75b220/" target="_blank"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg></a></div>
+<div class="text-ink-dim text-[10px] tracking-[0.2em] uppercase mt-16">© 2026 La Dirección · Antes del Prompt</div>
+</footer>
+<script>
+  const observerOptions = {
+    threshold: 0.1
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+      }
+    });
+  });
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+<script>
+  // Setup basic scene
+  const container = document.getElementById('canvas-container');
+  if (container) {
+    const scene = new THREE.Scene();
+    
+    // Camera
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+    camera.position.set(0, 1.5, 10);
+    
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    // --- Tomato Body Geometry ---
+    // Start with a high-res sphere
+    const geometry = new THREE.SphereGeometry(1.5, 128, 128);
+    const posAttribute = geometry.attributes.position;
+    const v = new THREE.Vector3();
+    
+    // Deform the sphere into an heirloom tomato shape
+    for (let i = 0; i < posAttribute.count; i++) {
+        v.fromBufferAttribute(posAttribute, i);
+        
+        // Flatten top and bottom
+        v.y *= 0.75;
+        
+        // Calculate angle for lobes
+        const angle = Math.atan2(v.z, v.x);
+        
+        // Add 6 main ridges/lobes
+        const lobeStrength = 0.15;
+        const lobe = 1 + Math.cos(angle * 6) * lobeStrength;
+        
+        // Apply lobes mostly to the equator, less at the poles
+        const distFromY = Math.sqrt(v.x*v.x + v.z*v.z) / 1.5;
+        const appliedLobe = 1 + (lobe - 1) * distFromY;
+        
+        v.x *= appliedLobe;
+        v.z *= appliedLobe;
+
+        // Create a slight depression at the top for the stem
+        if (v.y > 0) {
+            const distToCenterTop = Math.sqrt(v.x*v.x + v.z*v.z);
+            if (distToCenterTop < 0.8) {
+                v.y -= (0.8 - distToCenterTop) * 0.4;
+            }
+        }
+        
+        posAttribute.setXYZ(i, v.x, v.y, v.z);
+    }
+    geometry.computeVertexNormals();
+
+    // --- Tomato Material ---
+    // Deep blood red, highly reflective with clearcoat for a wet look
+    const material = new THREE.MeshPhysicalMaterial({
+        color: 0x5a0000,      // Deep burgundy base
+        emissive: 0x110000,   // Slight red glow in shadows
+        roughness: 0.15,      // Smooth skin
+        metalness: 0.1,       // Slight metallic sheen for high contrast reflections
+        clearcoat: 1.0,       // Wet look
+        clearcoatRoughness: 0.1,
+    });
+    
+    const tomatoMesh = new THREE.Mesh(geometry, material);
+    scene.add(tomatoMesh);
+
+    // --- Stem and Sepals (Leaves) ---
+    const stemGroup = new THREE.Group();
+    
+    // Main stem material (dark green, dry)
+    const stemMat = new THREE.MeshStandardMaterial({
+        color: 0x0a1a0f,
+        roughness: 0.9,
+        bumpScale: 0.05
+    });
+
+    // Main thick part of stem
+    const stemGeom = new THREE.CylinderGeometry(0.04, 0.08, 0.4, 8);
+    const mainStem = new THREE.Mesh(stemGeom, stemMat);
+    mainStem.position.y = 1.0;
+    // Curve the stem slightly
+    mainStem.rotation.z = 0.1;
+    stemGroup.add(mainStem);
+
+    // Sepals (the little leaves curling out)
+    const numSepals = 6;
+    for (let i = 0; i < numSepals; i++) {
+        // Create a thin, curved geometry for sepals
+        const sepalGeom = new THREE.CylinderGeometry(0.01, 0.04, 1.2, 5);
+        sepalGeom.translate(0, 0.6, 0); // pivot at bottom
+        
+        const sepal = new THREE.Mesh(sepalGeom, stemMat);
+        
+        // Position at the base of the stem
+        sepal.position.y = 0.8;
+        
+        // Rotate around the stem
+        const angle = (i / numSepals) * Math.PI * 2;
+        sepal.rotation.y = angle;
+        
+        // Curl them downwards and randomly twist
+        sepal.rotation.x = Math.PI / 2 + 0.4 + (Math.random() * 0.3);
+        sepal.rotation.z = (Math.random() - 0.5) * 0.5;
+        
+        stemGroup.add(sepal);
+    }
+    
+    tomatoMesh.add(stemGroup);
+
+    // --- Lighting (Dramatic & High Contrast) ---
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1); // Very low ambient
+    scene.add(ambientLight);
+
+    // Main key light (cool white)
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
+    keyLight.position.set(-5, 5, 3);
+    scene.add(keyLight);
+
+    // Rim light (warm/white) to highlight the dark edges
+    const rimLight = new THREE.DirectionalLight(0xffffff, 2.0);
+    rimLight.position.set(5, 2, -5);
+    scene.add(rimLight);
+    
+    // Fill light (very dim, slightly red)
+    const fillLight = new THREE.PointLight(0xff2222, 0.5);
+    fillLight.position.set(0, -3, 2);
+    scene.add(fillLight);
+
+    // Group to rotate the whole assembly slowly
+    const group = new THREE.Group();
+    group.add(tomatoMesh);
+    // Tilt it slightly forward to match a good camera angle
+    group.rotation.x = 0.2;
+    scene.add(group);
+
+    // Animation Loop
+    const clock = new THREE.Clock();
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        const delta = clock.getDelta();
+        // Slow rotation for presentation
+        group.rotation.y += 0.2 * delta;
+        
+        renderer.render(scene, camera);
+    }
+    
+    animate();
+
+    // Handle Window Resize
+    window.addEventListener('resize', () => {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+</body></html>
